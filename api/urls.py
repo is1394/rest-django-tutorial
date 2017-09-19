@@ -1,7 +1,11 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
+from rest_framework.routers import DefaultRouter
+
 from . import views
 
+router = DefaultRouter()
+router.register(r'notes', views.NoteViewSet)
+
 urlpatterns = [
-    url(r'^notes/$', views.NoteList.as_view()),
-    url(r'^notes/(?P<pk>[0-9]+)/$', views.NoteDetail.as_view()),
+    url(r'^', include(router.urls))
 ]
